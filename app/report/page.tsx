@@ -4,11 +4,74 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Select from '@/components/ui/Select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import Textarea from '@/components/ui/Textarea';
 import { AlertTriangle, Upload, X } from 'lucide-react';
+
+// Custom Select component wrapper
+const CustomSelect = ({ label, value, onChange, options, required }: {
+  label: string;
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  options: { value: string; label: string }[];
+  required?: boolean;
+}) => {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Select value={value} onValueChange={(newValue) => onChange({ target: { value: newValue } })}>
+        <SelectTrigger className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]">
+          <SelectValue placeholder="Select option" />
+        </SelectTrigger>
+        <SelectContent className="bg-gray-800 border-gray-700">
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value} className="text-white hover:bg-gray-700">
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};
+
+// Custom Textarea component wrapper
+const CustomTextarea = ({ label, value, onChange, placeholder, rows, required }: {
+  label: string;
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  placeholder?: string;
+  rows?: number;
+  required?: boolean;
+}) => {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Textarea
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        rows={rows}
+        required={required}
+        className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+      />
+    </div>
+  );
+};
 
 const incidentTypes = [
   { value: 'SQL Injection', label: 'SQL Injection' },
@@ -108,7 +171,7 @@ export default function ReportIncidentPage() {
                   />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Select
+                    <CustomSelect
                       label="Incident Type"
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
@@ -116,7 +179,7 @@ export default function ReportIncidentPage() {
                       required
                     />
 
-                    <Select
+                    <CustomSelect
                       label="Severity Level"
                       value={formData.severity}
                       onChange={(e) => setFormData({ ...formData, severity: e.target.value })}
@@ -125,7 +188,7 @@ export default function ReportIncidentPage() {
                     />
                   </div>
 
-                  <Textarea
+                  <CustomTextarea
                     label="Detailed Description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -227,6 +290,7 @@ export default function ReportIncidentPage() {
                               type="button"
                               onClick={() => removeFile(index)}
                               className="text-gray-400 hover:text-red-400 ml-2"
+                              title="Remove file"
                             >
                               <X className="h-4 w-4" />
                             </button>
@@ -247,9 +311,9 @@ export default function ReportIncidentPage() {
                   <Button
                     type="submit"
                     className="w-full"
-                    loading={loading}
+                    disabled={loading}
                   >
-                    Submit Incident Report
+                    {loading ? 'Submitting...' : 'Submit Incident Report'}
                   </Button>
                   
                   <Button

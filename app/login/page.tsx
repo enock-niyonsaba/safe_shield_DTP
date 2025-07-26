@@ -3,9 +3,45 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Shield, Eye, EyeOff } from 'lucide-react';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Select from '@/components/ui/Select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+// Custom Select component wrapper
+const CustomSelect = ({ label, value, onChange, options, required }: {
+  label: string;
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  options: { value: string; label: string }[];
+  required?: boolean;
+}) => {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Select value={value} onValueChange={(newValue) => onChange({ target: { value: newValue } })}>
+        <SelectTrigger className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]">
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        <SelectContent className="bg-gray-800 border-gray-700">
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value} className="text-white hover:bg-gray-700">
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -104,7 +140,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <Select
+            <CustomSelect
               label="Role"
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
@@ -115,9 +151,9 @@ export default function LoginPage() {
             <Button
               type="submit"
               className="w-full"
-              loading={loading}
+              disabled={loading}
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
+              {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Create Account')}
             </Button>
           </form>
 

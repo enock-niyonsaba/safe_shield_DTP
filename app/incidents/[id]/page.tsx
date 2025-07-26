@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import Button from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
 import { 
   ArrowLeft, 
   Clock, 
@@ -136,12 +136,8 @@ const getTimelineIcon = (type: string) => {
   return <Icon className="h-4 w-4" />;
 };
 
-export async function generateStaticParams() {
-  // Return static params for the mock incident
-  return [
-    { id: 'INC-2024-001' }
-  ];
-}
+// Note: generateStaticParams is not compatible with 'use client'
+// This function has been removed to fix the build error
 
 export default function IncidentDetailPage() {
   const params = useParams();

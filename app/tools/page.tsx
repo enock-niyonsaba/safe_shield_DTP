@@ -3,10 +3,16 @@
 import { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Select from '@/components/ui/Select';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import Textarea from '@/components/ui/Textarea';
 import { 
   Wrench, 
@@ -24,6 +30,28 @@ import {
   Lock
 } from 'lucide-react';
 import { Tool } from '@/types';
+
+// Custom Select component wrapper
+const CustomSelect = ({ value, onChange, options }: {
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  options: { value: string; label: string }[];
+}) => {
+  return (
+    <Select value={value} onValueChange={(newValue) => onChange({ target: { value: newValue } })}>
+      <SelectTrigger className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]">
+        <SelectValue placeholder="Select option" />
+      </SelectTrigger>
+      <SelectContent className="bg-gray-800 border-gray-700">
+        {options.map((option) => (
+          <SelectItem key={option.value} value={option.value} className="text-white hover:bg-gray-700">
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
 
 const toolsData: (Tool & { 
   category: string; 
@@ -225,17 +253,17 @@ export default function ToolsUsedPage() {
                   placeholder="Search tools..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
                 />
               </div>
-              <Select
+              <CustomSelect
                 value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                onChange={setCategoryFilter}
                 options={categoryOptions}
               />
-              <Select
+              <CustomSelect
                 value={effectivenessFilter}
-                onChange={(e) => setEffectivenessFilter(e.target.value)}
+                onChange={setEffectivenessFilter}
                 options={effectivenessOptions}
               />
             </div>

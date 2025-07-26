@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/Badge';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { 
   AlertTriangle, 
