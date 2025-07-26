@@ -1,34 +1,19 @@
-"use client"
-import HeroSection from "@/components/sections/hero-section"
-import FeaturesSection from "@/components/sections/features-section"
-import ChartsSection from "@/components/sections/charts-section"
-import AISection from "@/components/sections/ai-section"
-import HowItWorksSection from "@/components/sections/how-it-works-section"
-import TestimonialsSection from "@/components/sections/testimonials-section"
-import TechnologiesSection from "@/components/sections/technologies-section"
-import TrainingSection from "@/components/sections/training-section"
-import TeamSection from "@/components/sections/team-section"
-import CTASection from "@/components/sections/cta-section"
-import Footer from "@/components/layout/footer"
-import Header from "@/components/layout/header"
+'use client';
 
-export default function LandingPage() {
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to login page
+    router.push('/login');
+  }, [router]);
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <Header />
-      <main>
-        <HeroSection />
-        <FeaturesSection />
-        <ChartsSection />
-        <AISection />
-        <HowItWorksSection />
-        <TestimonialsSection />
-        <TechnologiesSection />
-        <TrainingSection />
-        <TeamSection />
-        <CTASection />
-      </main>
-      <Footer />
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--cyber-blue)]"></div>
     </div>
-  )
+  );
 }

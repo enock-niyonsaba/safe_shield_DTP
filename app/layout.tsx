@@ -1,30 +1,25 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { AuthProvider } from "@/contexts/auth-context"
-import { ThemeProvider } from "@/components/theme-provider"
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
-  title: "Safe Shield - Cybersecurity Platform",
-  description: "Advanced cybersecurity platform for threat detection and incident response",
-    generator: 'v0.dev'
-}
+  title: 'SafeShield - Cybersecurity Incident Response Platform',
+  description: 'Professional incident response and reporting platform for IT security teams',
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <AuthProvider>{children}</AuthProvider>
-        </ThemeProvider>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-gray-900 text-gray-100 antialiased`}>
+        {children}
       </body>
     </html>
-  )
+  );
 }
