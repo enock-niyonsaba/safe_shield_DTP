@@ -132,7 +132,7 @@ const systemLogs: SystemLog[] = [
 ];
 
 const severityOptions = [
-  { value: '', label: 'All Severities' },
+  { value: 'all', label: 'All Severities' },
   { value: 'Info', label: 'Info' },
   { value: 'Warning', label: 'Warning' },
   { value: 'Error', label: 'Error' },
@@ -140,7 +140,7 @@ const severityOptions = [
 ];
 
 const sourceOptions = [
-  { value: '', label: 'All Sources' },
+  { value: 'all', label: 'All Sources' },
   { value: 'Firewall', label: 'Firewall' },
   { value: 'IDS', label: 'IDS/IPS' },
   { value: 'Web Server', label: 'Web Server' },
@@ -173,16 +173,16 @@ const getSeverityIcon = (severity: string) => {
 
 export default function SystemLogsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [severityFilter, setSeverityFilter] = useState('');
-  const [sourceFilter, setSourceFilter] = useState('');
+  const [severityFilter, setSeverityFilter] = useState('all');
+  const [sourceFilter, setSourceFilter] = useState('all');
   const [dateRange, setDateRange] = useState('today');
 
   const filteredLogs = systemLogs.filter((log) => {
     const matchesSearch = log.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          log.sourceIP.includes(searchTerm) ||
                          log.action.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSeverity = !severityFilter || log.severity === severityFilter;
-    const matchesSource = !sourceFilter || log.source === sourceFilter;
+    const matchesSeverity = severityFilter === 'all' || !severityFilter || log.severity === severityFilter;
+    const matchesSource = sourceFilter === 'all' || !sourceFilter || log.source === sourceFilter;
     
     return matchesSearch && matchesSeverity && matchesSource;
   });

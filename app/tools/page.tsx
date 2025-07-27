@@ -150,7 +150,7 @@ const toolsData: (Tool & {
 ];
 
 const categoryOptions = [
-  { value: '', label: 'All Categories' },
+  { value: 'all', label: 'All Categories' },
   { value: 'Network Scanning', label: 'Network Scanning' },
   { value: 'Web Security', label: 'Web Security' },
   { value: 'Exploitation', label: 'Exploitation' },
@@ -160,7 +160,7 @@ const categoryOptions = [
 ];
 
 const effectivenessOptions = [
-  { value: '', label: 'All Effectiveness' },
+  { value: 'all', label: 'All Effectiveness' },
   { value: 'Critical', label: 'Critical' },
   { value: 'High', label: 'High' },
   { value: 'Medium', label: 'Medium' },
@@ -194,16 +194,16 @@ const getEffectivenessBadge = (effectiveness: string) => {
 
 export default function ToolsUsedPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('');
-  const [effectivenessFilter, setEffectivenessFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [effectivenessFilter, setEffectivenessFilter] = useState('all');
   const [showAddModal, setShowAddModal] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   const filteredTools = toolsData.filter((tool) => {
     const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          tool.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !categoryFilter || tool.category === categoryFilter;
-    const matchesEffectiveness = !effectivenessFilter || tool.effectiveness === effectivenessFilter;
+    const matchesCategory = categoryFilter === 'all' || !categoryFilter || tool.category === categoryFilter;
+    const matchesEffectiveness = effectivenessFilter === 'all' || !effectivenessFilter || tool.effectiveness === effectivenessFilter;
     
     return matchesSearch && matchesCategory && matchesEffectiveness;
   });

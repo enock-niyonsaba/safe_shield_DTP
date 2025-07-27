@@ -108,7 +108,7 @@ const incidents = [
 ];
 
 const severityOptions = [
-  { value: '', label: 'All Severities' },
+  { value: 'all', label: 'All Severities' },
   { value: 'Low', label: 'Low' },
   { value: 'Medium', label: 'Medium' },
   { value: 'High', label: 'High' },
@@ -116,7 +116,7 @@ const severityOptions = [
 ];
 
 const statusOptions = [
-  { value: '', label: 'All Statuses' },
+  { value: 'all', label: 'All Statuses' },
   { value: 'Open', label: 'Open' },
   { value: 'Investigating', label: 'Investigating' },
   { value: 'Contained', label: 'Contained' },
@@ -149,14 +149,14 @@ const getStatusBadge = (status: string) => {
 
 export default function IncidentsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [severityFilter, setSeverityFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [severityFilter, setSeverityFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   const filteredIncidents = incidents.filter((incident) => {
     const matchesSearch = incident.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          incident.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSeverity = !severityFilter || incident.severity === severityFilter;
-    const matchesStatus = !statusFilter || incident.status === statusFilter;
+    const matchesSeverity = severityFilter === 'all' || !severityFilter || incident.severity === severityFilter;
+    const matchesStatus = statusFilter === 'all' || !statusFilter || incident.status === statusFilter;
     
     return matchesSearch && matchesSeverity && matchesStatus;
   });
