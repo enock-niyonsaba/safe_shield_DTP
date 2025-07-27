@@ -16,6 +16,31 @@ import {
 import Textarea from '@/components/ui/Textarea';
 import { AlertTriangle, Upload, X } from 'lucide-react';
 
+// Custom Input component wrapper
+const CustomInput = ({ label, value, onChange, placeholder, required }: {
+  label: string;
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  placeholder?: string;
+  required?: boolean;
+}) => {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Input
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+      />
+    </div>
+  );
+};
+
 // Custom Select component wrapper
 const CustomSelect = ({ label, value, onChange, options, required }: {
   label: string;
@@ -162,7 +187,7 @@ export default function ReportIncidentPage() {
                   <CardTitle>Incident Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Input
+                  <CustomInput
                     label="Incident Title"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -197,7 +222,7 @@ export default function ReportIncidentPage() {
                     required
                   />
 
-                  <Input
+                  <CustomInput
                     label="Reporter Name"
                     value={formData.reporter}
                     onChange={(e) => setFormData({ ...formData, reporter: e.target.value })}

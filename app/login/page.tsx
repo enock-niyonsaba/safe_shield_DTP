@@ -43,6 +43,33 @@ const CustomSelect = ({ label, value, onChange, options, required }: {
   );
 };
 
+// Custom Input component wrapper
+const CustomInput = ({ label, type, value, onChange, placeholder, required }: {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (e: { target: { value: string } }) => void;
+  placeholder?: string;
+  required?: boolean;
+}) => {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        className="w-full bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+      />
+    </div>
+  );
+};
+
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -113,7 +140,7 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
+            <CustomInput
               label="Email Address"
               type="email"
               value={formData.email}
@@ -123,7 +150,7 @@ export default function LoginPage() {
             />
 
             <div className="relative">
-              <Input
+              <CustomInput
                 label="Password"
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}

@@ -15,6 +15,11 @@ const badgeVariants = cva(
         destructive:
           'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         outline: 'text-foreground',
+        // Custom variants for the cybersecurity theme
+        danger: 'border-red-500/20 bg-red-500/10 text-red-400',
+        warning: 'border-yellow-500/20 bg-yellow-500/10 text-yellow-400',
+        info: 'border-blue-500/20 bg-blue-500/10 text-blue-400',
+        success: 'border-green-500/20 bg-green-500/10 text-green-400',
       },
     },
     defaultVariants: {

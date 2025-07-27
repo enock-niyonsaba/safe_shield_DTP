@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -174,7 +174,7 @@ export default function TeamChatPage() {
                 placeholder="Search conversations..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+                className="pl-10 bg-gray-900/50"
               />
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function TeamChatPage() {
                   placeholder={`Message #${activeChannelName}`}
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
-                  className="pr-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+                  className="pr-10"
                 />
                 <Button variant="ghost" size="sm" type="button" className="absolute right-2 top-1/2 transform -translate-y-1/2">
                   <Smile className="h-4 w-4" />

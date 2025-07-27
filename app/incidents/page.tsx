@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -199,18 +199,18 @@ export default function IncidentsPage() {
                   placeholder="Search incidents..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+                  className="pl-10"
                 />
               </div>
               <div className="flex gap-2">
                 <CustomSelect
                   value={severityFilter}
-                  onChange={setSeverityFilter}
+                  onChange={(e) => setSeverityFilter(e.target.value)}
                   options={severityOptions}
                 />
                 <CustomSelect
                   value={statusFilter}
-                  onChange={setStatusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
                   options={statusOptions}
                 />
               </div>

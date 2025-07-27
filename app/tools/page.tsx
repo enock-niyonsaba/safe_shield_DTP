@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -253,19 +253,19 @@ export default function ToolsUsedPage() {
                   placeholder="Search tools..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+                  className="pl-10"
                 />
               </div>
-              <CustomSelect
-                value={categoryFilter}
-                onChange={setCategoryFilter}
-                options={categoryOptions}
-              />
-              <CustomSelect
-                value={effectivenessFilter}
-                onChange={setEffectivenessFilter}
-                options={effectivenessOptions}
-              />
+                              <CustomSelect
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  options={categoryOptions}
+                />
+                <CustomSelect
+                  value={effectivenessFilter}
+                  onChange={(e) => setEffectivenessFilter(e.target.value)}
+                  options={effectivenessOptions}
+                />
             </div>
           </CardContent>
         </Card>

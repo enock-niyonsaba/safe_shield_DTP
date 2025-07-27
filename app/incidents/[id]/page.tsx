@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { 
   ArrowLeft, 
@@ -135,9 +135,6 @@ const getTimelineIcon = (type: string) => {
   const Icon = icons[type as keyof typeof icons] || FileText;
   return <Icon className="h-4 w-4" />;
 };
-
-// Note: generateStaticParams is not compatible with 'use client'
-// This function has been removed to fix the build error
 
 export default function IncidentDetailPage() {
   const params = useParams();

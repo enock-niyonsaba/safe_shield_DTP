@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -243,22 +243,22 @@ export default function SystemLogsPage() {
                   placeholder="Search logs, IPs, actions..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 focus:ring-[var(--cyber-blue)] focus:border-[var(--cyber-blue)]"
+                  className="pl-10"
                 />
               </div>
               <CustomSelect
                 value={severityFilter}
-                onChange={setSeverityFilter}
+                onChange={(e) => setSeverityFilter(e.target.value)}
                 options={severityOptions}
               />
               <CustomSelect
                 value={sourceFilter}
-                onChange={setSourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value)}
                 options={sourceOptions}
               />
               <CustomSelect
                 value={dateRange}
-                onChange={setDateRange}
+                onChange={(e) => setDateRange(e.target.value)}
                 options={[
                   { value: 'today', label: 'Today' },
                   { value: 'week', label: 'This Week' },
