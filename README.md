@@ -83,13 +83,16 @@ Safe Shield is a comprehensive cybersecurity incident management platform that p
 ## 🖼️ Screenshots
 
 ### Dashboard
-![Dashboard](https://via.placeholder.com/800x400/1f2937/ffffff?text=Safe+Shield+Dashboard)
+![Dashboard](https://github.com/enock-niyonsaba/safe_shield_DTP/blob/main/screenshots/Dashboard.PNG)
+
+### Incident Report
+![Dashboard](https://github.com/enock-niyonsaba/safe_shield_DTP/blob/main/screenshots/Report%20Incident.PNG)
 
 ### Incident Management
-![Incident Management](https://via.placeholder.com/800x400/1f2937/ffffff?text=Incident+Management)
+![Incident Management](https://github.com/enock-niyonsaba/safe_shield_DTP/blob/main/screenshots/Incendent%20Reported.PNG)
 
 ### Incident Details
-![Incident Details](https://via.placeholder.com/800x400/1f2937/ffffff?text=Incident+Details)
+![Incident Details](https://github.com/enock-niyonsaba/safe_shield_DTP/blob/main/screenshots/Incident%20View.PNG)
 
 ## 🛠️ Tech Stack
 
@@ -343,7 +346,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [docs.safeshield.com](https://docs.safeshield.com)
+- **Documentation**: [Documentation](https://github.com/enock-niyonsaba/safe_shield_DTP/tree/main/docs)
 - **Issues**: [GitHub Issues](https://github.com/enock-niyonsaba/safe-shield/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/enock-niyonsaba/safe-shield/discussions)
 - **Email**: enockccg28@gmail.com
